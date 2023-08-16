@@ -32,6 +32,12 @@ async function createCube(cubeData) {
         difficultyLevel: Number(cubeData.difficultyLevel)
     };
 
+    const missing = Object.entries(cube).filter(([k,v]) => !v);
+
+    if(missing.length > 0) {
+        throw new Error(missing.map(m => `${m[0]} is required!`).join('\n'));
+    }
+
     data.push(cube);
     await persist();
     return cube;

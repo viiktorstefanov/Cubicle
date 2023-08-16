@@ -12,10 +12,10 @@ router.post('/', async (req, res) => {
         res.redirect('/details/' + result.id); 
     } catch(err) {
          res.render('create', {
-            title: "error"
+            error: err.message.split('\n')
          })
     }
-    res.render('create');
+    
 })
 
 module.exports = router;

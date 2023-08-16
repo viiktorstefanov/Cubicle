@@ -1,4 +1,9 @@
-<h1>Create {{title}}</h1>
+<h1>Create</h1>
+{{#if error}}
+{{#each error}}
+    <span class="error">{{this}}</span>
+ {{/each}}
+ {{/if}}
 <div class="form">
         <form action='/create' method="post">
           <label for="name">Name</label>
