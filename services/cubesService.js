@@ -23,7 +23,26 @@ function getById(id) {
     return data.find(x => x.id == id);
 }
 
+async function createCube(cubeData) {
+    const cube = {
+        id: createId(),
+        name: cubeData.name,
+        description: cubeData.description,
+        imageUrl: cubeData.imageUrl,
+        difficultyLevel: Number(cubeData.difficultyLevel)
+    };
+
+    data.push(cube);
+    await persist();
+    return cube;
+};
+
+function createId() {
+    return ('000000' +  (Math.random() * 999999 | 0).toString(16)).slice(-6);
+}
+
 module.exports = {
     getAll,
-    getById
+    getById,
+    createCube
 }
