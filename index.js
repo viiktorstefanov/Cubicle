@@ -21,7 +21,7 @@ app.use('/static', express.static('static'));
 app.use(homeController);
 app.use('/about', aboutController);
 app.use('/create', createController);
-app.use('/details/:id', detailsController);
+app.use('/details', detailsController);
 app.all('*', defaultController);
 
 app.listen(port);
