@@ -5,7 +5,7 @@ const data = JSON.parse(fs.readFileSync(filename));
 
 async function persist() {
     return new Promise((res, rej) => {
-        fs.writeFile(filename, JSON.stringify(data), (err) => {
+        fs.writeFile(filename, JSON.stringify(data, null, 2 ), (err) => {
             if (err == null) {
                 res();
             } else {
@@ -15,8 +15,12 @@ async function persist() {
     })
 }
 
-function getAll() {
-    return data;
+function getAll(search, fromDifficult, toDifficult) {
+    search = search.toLowerCase();
+    return data
+    .filter(c => c.name.toLowerCase().includes(search))
+    .filter(c => c.difficultyLevel >= fromDifficult && c.difficultyLevel <= toDifficult);
+
 }
 
 function getById(id) {
