@@ -1,27 +1,21 @@
 const express = require('express');
+const expressConfig = require('./config/express');
+const routesConfig = require('./config/routes');
+const databaseConfig = require('./config/database');
 const port = 3000;
-const hbs = require('express-handlebars');
-const handlebars = hbs.create({
-    extname: '.hbs'
-});
 
-const homeController = require('./controllers/homeController');
-const aboutController = require('./controllers/aboutController');
-const detailsController = require('./controllers/detailsController');
-const createController = require('./controllers/createController');
-const defaultController = require('./controllers/defaultController');
+start();
 
-const app = express();
-app.engine('.hbs', handlebars.engine);
-app.set('view engine', '.hbs');
+async function start() {
+    const app = express();
+    
+    await databaseConfig(app);
+    expressConfig(app);
+    routesConfig(app);
 
-app.use(express.urlencoded({ extended: true }));
-app.use('/static', express.static('static'));
+    app.listen(port, () => console.log(`server is listening on port ${port}`));
+}
 
-app.use(homeController);
-app.use('/about', aboutController);
-app.use('/create', createController);
-app.use('/details', detailsController);
-app.all('*', defaultController);
 
-app.listen(port);
+
+
