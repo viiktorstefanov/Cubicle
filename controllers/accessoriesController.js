@@ -12,7 +12,9 @@ router.post('/create', async (req, res) => {
         await createAccessories(req.body.name,req.body.description,req.body.imageUrl);
         res.redirect('/');
     } catch(err) {
-        res.render('accessory')
+        res.render('accessory', {
+            error: err.message.split('\n')
+        })
     }
 });
 

@@ -17,7 +17,8 @@ router.get('/:id', async (req, res) => {
     if(cube) {
         res.render('details', {
             cube,
-            haveAcessories
+            haveAcessories,
+            isOwner: req.user._id == cube.owner
         });
     } else {
         res.render('404');
