@@ -1,7 +1,13 @@
 const Cube = require('../models/cube');
 
-function getAll(search) {
-    return Cube.find({ }).lean();
+function getAll(search = '', fromInput, toInput) {
+    const from = Number(fromInput) || 1;
+    const to = Number(toInput) || 6;
+
+    return Cube.find({name: { $regex: new RegExp(search, 'i') }})
+    .where('difficultyLevel').lte(to).gte(from).lean();
+    
+        
 };   
 
 function getById(id) {

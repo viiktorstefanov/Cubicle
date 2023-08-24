@@ -1,11 +1,15 @@
 <h1>Browser</h1>
-      <form method="get">
-        <input type="text" class="search" name="search"  value="{{search.search}}" placeholder="Search..." value={{search.search}}>
-        <input type="number" name="from" value="{{search.from}}" class="difficulty" placeholder="Difficulty from...">
-        <span>-</span>
-        <input type="number" name="to" value="{{search.to}}" class="difficulty" placeholder="Difficulty to...">
-        <input type="submit" value="search">
-      </form>
-      {{#each cubes}}
-      {{> cubeCard}}
-      {{/each}}
+<form method="get">
+  <input type="text" class="search" name="search" value="{{search}}" placeholder="Search..." value={{search.search}}>
+  <input type="number" name="from" value="{{from}}" class="difficulty" placeholder="Difficulty from...">
+  <span>-</span>
+  <input type="number" name="to" value="{{to}}" class="difficulty" placeholder="Difficulty to...">
+  <input type="submit" value="search">
+</form>
+{{#if cubes}}
+{{#each cubes}}
+{{> cubeCard}}
+{{/each}}
+{{else}}
+<span class="match">There are no matches available!</span>
+{{/if}}
