@@ -2,8 +2,11 @@ Small Multi Page Application with server side rendering. Dependencies: Express, 
 
 Instructions for starting the project:
 
--install all dependencies with:
+-install all dependencies with
+<br>
 npm i
+<br>
 -start project
+<br>
 npm run start.
 
