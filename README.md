@@ -1,9 +1,5 @@
-Small Multi Page Application with server side rendering. Dependencies: Express, Handlebars, MongoDB, Cookie-Partser, JsonWebToken, Mongoose, Bcrypt.
-
-Instructions for starting the project:
-
--install all dependencies with:
-npm i
--start project
-npm run start.
-
+<p align="center">
+Multi Page Application with server side rendering. 
+<br>
+Dependencies: Express, Handlebars, MongoDB, Cookie-Partser, JsonWebToken, Mongoose, Bcrypt.
+</p>
