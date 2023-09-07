@@ -3,26 +3,26 @@ const { body, validationResult } = require('express-validator');
 const { register, login } = require('../services/authService');
 const { parseError } = require('../utils/errorParser');
 
+
 router.get('/register', (req, res) => {
     res.render('register');
 });
 
-router.post('/register', 
+router.post('/register',
 body('username')
 .trim()
-.notEmpty().withMessage('Username is required!').bail()
-.isAlphanumeric().withMessage('Username may contain only english letters and numbers'),
+.isLength( { min: 6 }).withMessage('Username must be at least 6 characters long !'),
 body('password')
 .trim()
-.isLength( { min: 6 } ).withMessage('Password must be at least 6 charecters long!'),
+.isLength( { min: 8 } ).withMessage('Password must be at least 8 charecters long !'),
 body('repeatPassword')
 .trim()
 .custom(async (value, { req }) => {
     if(value != req.body.password) {
-        throw new Error('Passwords do not match');
+        throw new Error('Passwords do not match !');
     }
 })
-.withMessage('Passwords do not match'),
+.withMessage('Passwords do not match !'),
 async (req, res) => {
     try {
         const { errors } = validationResult(req);
@@ -36,14 +36,13 @@ async (req, res) => {
         res.redirect('/');
 
     } catch(error) {
-        console.log(parseError(error));
-        const fields = Object.fromEntries(error.map(e => [e.path, e.path]));
+        // const fields = error.map(e => [e.path, e.path]);
         res.render('register', {
             body: {
                 username: req.body.username
             },  
-            error : parseError(error).reverse(),
-            fields
+            error: parseError(error),
+            // fields
         })
     }
 
@@ -56,10 +55,10 @@ router.get('/login', (req, res) => {
 router.post('/login', 
 body('username')
 .trim()
-.notEmpty().withMessage('Username is required!'),
+.notEmpty().withMessage('Username is required !'),
 body('password')
 .trim()
-.notEmpty().withMessage('Password is required!'),
+.notEmpty().withMessage('Password is required !'),
 async (req, res) => {
     try {
         const { errors } = validationResult(req);
@@ -73,13 +72,13 @@ async (req, res) => {
         res.redirect('/');
 
     } catch(error) {
-        const fields = Object.fromEntries(error.map(e => [e.path, e.path]));
+        // const fields = Object.fromEntries(error.map(e => [e.path, e.path]));
         res.render('login', {
             body: {
                 username: req.body.username
             },  
-            error : parseError(error).reverse(),
-            fields
+            error: parseError(error),
+            // fields
         })
     }
 });

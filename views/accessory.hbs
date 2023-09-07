@@ -1,13 +1,8 @@
 <h1>Create Accessory</h1>
-{{#if error}}
-{{#each error}}
-<span class="error">{{this}}</span>
-{{/each}}
-{{/if}}
 <div class="form">
         <form action="/accessories/create" method="POST">
                 <label for="name">Name</label>
-                <input type="text" id="name" name="name" value="{{body.name}}">
+                <input type="text" id="name" name="name" value={{body.name}}>
                 <label for="name">Description</label>
                 <textarea id="description" name="description">{{body.description}}</textarea>
                 <label for="image">ImageUrl</label>

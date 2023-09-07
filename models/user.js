@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const userSchema = new Schema({
-    username: { type: String, minlength: [5, 'Username must be at least 5 characters long!'] },
+    username: { type: String, minlength: [6, 'Username must be at least 6 characters long !'] , required: true , unique: true },
     hashedPassword: { type: String, required: true },
     roles: { type: [{ type: String, enum: ['user', 'admin'] }], default: ['user'] }
     

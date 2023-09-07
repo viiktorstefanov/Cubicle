@@ -1,9 +1,4 @@
 <h1>Register Form</h1>
-    {{#if error}}
-        {{#each error}}
-        <span class="error">{{this}}</span>
-        {{/each}}
-    {{/if}}
 <div class="form">
     <form action="/auth/register" method="POST">
         <!-- if fields.username or fields.password or fields.repeatPassword add class with style for error warning  -->

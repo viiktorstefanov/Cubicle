@@ -1,6 +1,5 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
-const { body, validationResult } = require('express-validator');
 
 async function register(username, password) {
     const existing = await User.findOne({ username }).collation({ locale: 'en', strength: 2 });
@@ -9,7 +8,6 @@ async function register(username, password) {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-
     const user = await User.create({
         username,
         hashedPassword
